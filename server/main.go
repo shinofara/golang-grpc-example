@@ -14,6 +14,8 @@ import (
 	"google.golang.org/grpc"
 )
 
+var status string
+
 func main() {
 	listenPort, err := net.Listen("tcp", ":19003")
 	if err != nil {
@@ -29,6 +31,7 @@ func main() {
 	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
 
 	go func() {
+		status = "server is running"
 		fmt.Println("start grpc server 0.0.0.0:19003")
 		errprint(server.Serve(listenPort))
 	}()
@@ -54,6 +57,7 @@ func main() {
 		fmt.Println("Unknown signal.")
 	}
 
+	status = "server is start graceful stop"
 	fmt.Println("Start GracefulStop")
 	server.GracefulStop()
 
@@ -69,9 +73,14 @@ type Server struct{}
 
 func (_ Server) GetData(c context.Context, r *pb.GetDataRequest) (*pb.GetDataResponse, error) {
 	fmt.Printf("Request Data %v\n", *r)
-	time.Sleep(30 * time.Second)
+
+	var wait int32 = 0
+	if w := r.Wait; w > 0 {
+		wait = w
+	}
+	time.Sleep(time.Duration(wait) * time.Second)
 
 	return &pb.GetDataResponse{
-		Data: fmt.Sprintf("Finish ID %d", r.Id),
+		Data: fmt.Sprintf("Finish ID %d, Server status is %s", r.Id, status),
 	}, nil
 }

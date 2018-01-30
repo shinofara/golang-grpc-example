@@ -12,8 +12,10 @@ import (
 
 func main() {
 	var id int
+	var wait int
 	var hostname string
 	flag.IntVar(&id, "id", 0, "")
+	flag.IntVar(&wait, "wait", 0, "")
 	flag.StringVar(&hostname, "h", "127.0.0.1", "")
 	flag.Parse()
 
@@ -25,7 +27,8 @@ func main() {
 	defer conn.Close()
 	client := pb.NewExampleClient(conn)
 	message := &pb.GetDataRequest{
-		Id: int32(id),
+		Id:   int32(id),
+		Wait: int32(wait),
 	}
 	res, err := client.GetData(context.TODO(), message)
 

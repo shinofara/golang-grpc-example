@@ -5,6 +5,7 @@ services:
       context: server
     ports:
       - 127.0.0.1:19003:19003
+    stop_grace_period: 30s
   client:
     build:
       context: client

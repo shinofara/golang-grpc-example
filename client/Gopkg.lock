@@ -17,7 +17,7 @@
   branch = "master"
   name = "github.com/shinofara/golang-grpc-example"
   packages = ["proto"]
-  revision = "e1d25faf67e815366f106312f9802c2f0cd8c5c4"
+  revision = "48d70e24e649bf816bf8dad191d672a37ce0628f"
 
 [[projects]]
   branch = "master"
