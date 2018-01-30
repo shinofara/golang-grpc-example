@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"time"
 
-	pb "github.com/shinofara/grpc/proto"
+	pb "github.com/shinofara/golang-grpc-example/proto"
 	"google.golang.org/grpc"
 )
 
