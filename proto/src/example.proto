@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package grpc;
+
+service Example {
+  rpc GetData (GetDataRequest) returns (GetDataResponse) {}
+}
+
+message GetDataRequest {
+   int32 id = 1;
+}
+
+message GetDataResponse {
+  string data = 1;
+}
