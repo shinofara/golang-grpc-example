@@ -62,3 +62,31 @@ $ go run main.go --id 1
 ```
 
 ![GIF2](image/grpc-graceful-server-on-docker.gif)
+
+## 3. docker-composeを使った確認
+
+結果killの仕方で思った結果とちがう結果が帰ってきた
+
+```
+$ docker-compose up serer
+```
+
+```
+$ ps | grep docker-compose
+kill -SIGTERM xxxxx
+```
+
+の場合は、docker-compose自体の停止となってしまい、コンテナ内部までSIGNALの通知が行っていない。
+その為、docker-composeは自信で定めた時間は、内部プロセスが存在しても待つが、それをすぎると強制KILLを行っている
+
+![GIF3](image/bad-pattern.gif)
+
+docker-composeを使ってコンテナに対して正しく、SIGTERMを送るには
+
+```
+$ docker-compose kill -s SIGTERM server
+```
+
+が正しい、この場合 [test-2](https://github.com/shinofara/golang-grpc-example#2-server%E3%81%A0%E3%81%91docker%E4%B8%8A%E3%81%AB%E7%A7%BB%E5%8B%95) のときと同じ挙動を確認できた
+
+![GIF4](image/good-pattern.gif)
