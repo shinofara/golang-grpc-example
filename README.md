@@ -110,3 +110,10 @@ $ docker-compose kill -s SIGTERM server
 
  docker-composeのような、コンテナマネジメントツール側のGraceful Stopが実行に入ると、コンテナ内部まで伝達されている事が確認とれた。
  思うことは内部＋数十秒レベルは余裕を持っておくと先に、マネジメントツールが死ぬという状態は無くて良さそう
+
+## 5. おまけkubernetes
+
+k8s上にserverを立ち上げて、実行してみた。
+問題無さそう
+
+![k8s](image/kubernetes.gif)
