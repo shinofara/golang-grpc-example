@@ -12,11 +12,13 @@ import (
 
 func main() {
 	var id int
+	var hostname string
 	flag.IntVar(&id, "id", 0, "")
+	flag.StringVar(&hostname, "h", "127.0.0.1", "")
 	flag.Parse()
 
 	//sampleなのでwithInsecure
-	conn, err := grpc.Dial("127.0.0.1:19003", grpc.WithInsecure())
+	conn, err := grpc.Dial(fmt.Sprintf("%s:19003", hostname), grpc.WithInsecure())
 	if err != nil {
 		log.Fatal("client connection error:", err)
 	}
