@@ -15,6 +15,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/shinofara/golang-grpc-example"
+  packages = ["proto"]
+  revision = "e1d25faf67e815366f106312f9802c2f0cd8c5c4"
+
+[[projects]]
+  branch = "master"
   name = "golang.org/x/net"
   packages = [
     "context",
@@ -86,6 +92,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "cee39acf9308fc884e31cbd2ef6f4b0ca454bec6261e896fd32dceab74f725dd"
+  inputs-digest = "48a3b87596b949dd5047f1eac60b4ca5ebb143d8f33d42daa225ffac0abd9d6d"
   solver-name = "gps-cdcl"
   solver-version = 1
